@@ -135,7 +135,7 @@
 - **Réponse** : 200 OK
 
   
-### Via API Gateway (http://localhost:8082)
+### Via API Gateway (http://localhost:8080)
 
 #### Reservation Service
 
@@ -206,7 +206,7 @@
 - **Réponse** : 200 OK
 
 
-### Via API Gateway (http://localhost:8083)
+### Via API Gateway (http://localhost:8080)
 
 #### Payment Service
 
