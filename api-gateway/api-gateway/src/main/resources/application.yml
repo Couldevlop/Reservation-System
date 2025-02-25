@@ -1,0 +1,47 @@
+server:
+  port: 8080  # Port de l'API Gateway
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Active la découverte via Eureka
+          lower-case-service-id: true  # Utilise les noms en minuscules
+      routes:
+        - id: reservation-service
+          uri: lb://reservation-service  # lb = load balancer via Eureka
+          predicates:
+            - Path=/api/v1/reservations/**  # Route les requêtes /reservations vers reservation-service
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/api/v1/payments/**  # Route les requêtes /api/v1/payments vers payment-service
+        - id: catalog-service
+          uri: lb://catalog-service
+          predicates:
+            - Path=/api/v1/cars/**  # Route les requêtes /cars vers catalog-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    initial-instance-info-replication-interval-seconds: 10  # Délai initial de réplication
+    registry-fetch-interval-seconds: 10  # Intervalle de récupération du registre
+    instance-info-replication-interval-seconds: 30  # Intervalle de réplication des infos
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, gateway
+
+logging:
+  level:
+    com.netflix.discovery: DEBUG  # Logs détaillés pour Eureka
+    org.springframework.cloud: DEBUG  # Logs pour Spring Cloud Gateway

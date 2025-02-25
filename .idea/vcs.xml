@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../NOTARIS_PROJECT/notaris" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Reservation-System" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/reservation-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../backend_gestiondestock_src/e-magasin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../e-magasin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../e-magasin-front" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../restaurant-front" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../spring-petclinic-microservices" vcs="Git" />
+  </component>
+</project>
