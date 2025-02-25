@@ -33,22 +33,22 @@ class CarServiceTests {
 
     @BeforeEach
     void setUp() {
-        // Initialisation explicite des mocks
+
         MockitoAnnotations.openMocks(this);
 
-        // Mock de base pour save
+
         when(carRepository.save(any(Car.class))).thenAnswer(invocation -> invocation.getArgument(0));
     }
 
     @Test
     void shouldCreateCar() {
-        // Arrange
+
         CarDTO carDTO = new CarDTO(null, "Mercedes GLC", true);
 
-        // Act
+
         CarDTO createdCar = carService.createCar(carDTO);
 
-        // Assert
+
         assertNotNull(createdCar.id());
         assertEquals("Mercedes GLC", createdCar.name());
         assertTrue(createdCar.available());
@@ -103,17 +103,17 @@ class CarServiceTests {
 
     @Test
     void shouldUpdateCar() {
-        // Arrange
+
         Car car = new Car("1", "BMW XX", true);
         when(carRepository.findById("1")).thenReturn(Optional.of(car));
         when(carRepository.save(any(Car.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         CarDTO carDTO = new CarDTO("1", "Toyota Corolla", false);
 
-        // Act
+
         CarDTO updatedCar = carService.updateCar("1", carDTO);
 
-        // Assert
+
         assertNotNull(updatedCar);
         assertEquals("1", updatedCar.id());
         assertEquals("Toyota Corolla", updatedCar.name());
@@ -136,23 +136,23 @@ class CarServiceTests {
 
     @Test
     void shouldDeleteCar() {
-        // Arrange
+
         when(carRepository.existsById("1")).thenReturn(true);
 
-        // Act
+
         carService.deleteCarById("1");
 
-        // Assert
+
         verify(carRepository, times(1)).deleteById("1");
         verify(kafkaTemplate, times(1)).send(eq("cars"), any(CarEvent.class));
     }
 
     @Test
     void shouldThrowExceptionWhenDeletingNonExistingCar() {
-        // Arrange
+
         when(carRepository.existsById("1")).thenReturn(false);
 
-        // Act & Assert
+
         assertThrows(RuntimeException.class, () -> carService.deleteCarById("1"));
         verify(carRepository, never()).deleteById("1");
         verify(kafkaTemplate, never()).send(any(), any(CarEvent.class));
